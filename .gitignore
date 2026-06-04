@@ -1,5 +1,9 @@
 node_modules/
-dist/
+# dist/ is committed so consumers installing via git+https don't need to run
+# the prepare script (tsc) at install time — that race-conditioned against
+# Vercel's concurrent pnpm worker pool (ERR_PNPM_EEXIST during prepare).
+pnpm-lock.yaml
+package-lock.json
 *.log
 .DS_Store
 .vscode/

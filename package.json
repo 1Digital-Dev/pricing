@@ -1,6 +1,6 @@
 {
   "name": "@1digital/pricing",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Single source of truth for Workspace CMS pricing, allowances, overage, SLA, fair-use, and billing lifecycle. Consumed by 1digital-sites (workspacecms.ai), v0-1-digital-ai-dashboard (app.1digital.ai), and 1digital-new-site (1digitalagency.com/cms-platform).",
   "type": "module",
   "main": "./dist/index.js",
@@ -33,7 +33,6 @@
     "clean": "rm -rf dist",
     "typecheck": "tsc -p tsconfig.json --noEmit",
     "test": "node --test --import tsx src/*.test.ts",
-    "prepare": "npm run build",
     "prepublishOnly": "npm run clean && npm run build"
   },
   "devDependencies": {
