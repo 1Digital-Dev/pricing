@@ -48,9 +48,19 @@ export const PRICING = {
     //   relationship start). Managed and White-Glove both = 1 hr flat — WG's
     //   value premium over Managed is paid in support hrs / AI credits / seats /
     //   bandwidth / AI-visibility cadence, not in strategist time.
+    // 2026-06-04 v0.2.0 — margin-tightening pass (strategy review). Growth
+    // + Premium AI-credit caps dropped from 1,000 -> 700 and 2,500 -> 1,800
+    // respectively. The previous allowances were over-provisioned by ~3x
+    // vs realistic SMB usage and were leaving ~$10-25/tenant/mo on the
+    // table at no perceived-value loss (a 700-credit Growth cap is still
+    // 350 blog drafts/mo; a 1,800-credit Premium cap is 900 drafts/mo --
+    // well past any plausible single-tenant consumption rate). Essentials
+    // stays at 200 -- right-sized today. Per-action schedule + $0.10/
+    // credit overage rate unchanged. Full rationale + worst-case-COGS math
+    // in the strategy-pass report from 2026-06-04.
     essentials:  { price_mo: 89,  price_yr: 890,  hosted: true,  bandwidth_gb: 10,   ai_credits: 200,  seats: 2,  domains: 1, support_hrs: 1, strategy_hours_mo: 0, posture: "guided",      sla: false },
-    managed:     { price_mo: 199, price_yr: 2388, hosted: true,  bandwidth_gb: 25,   ai_credits: 1000, seats: 5,  domains: 1, support_hrs: 2, strategy_hours_mo: 1, posture: "accompanied", sla: true  },
-    white_glove: { price_mo: 449, price_yr: 5388, hosted: true,  bandwidth_gb: 100,  ai_credits: 2500, seats: 10, domains: 3, support_hrs: 4, strategy_hours_mo: 1, posture: "led",         sla: true  },
+    managed:     { price_mo: 199, price_yr: 2388, hosted: true,  bandwidth_gb: 25,   ai_credits: 700,  seats: 5,  domains: 1, support_hrs: 2, strategy_hours_mo: 1, posture: "accompanied", sla: true  },
+    white_glove: { price_mo: 449, price_yr: 5388, hosted: true,  bandwidth_gb: 100,  ai_credits: 1800, seats: 10, domains: 3, support_hrs: 4, strategy_hours_mo: 1, posture: "led",         sla: true  },
   },
 
   // AI Visibility tracker caps — enforced server-side per calendar month.
