@@ -4,7 +4,7 @@
 // Every number on the site and in enforcement reads from here.
 // Change a value once → it propagates everywhere. Do not hard-code these anywhere else.
 //
-// Effective: Jun 2, 2026 · v1.3 (risk-tightening pass)
+// Effective: Jun 13, 2026 · v1.4 (AI credit schedule update)
 //   Decisions (full rationale in docs/superpowers/specs/2026-06-02-pricing-v1.3-design.md):
 //
 //   Plans:
@@ -110,12 +110,13 @@ export const PRICING = {
   },
 
   ai_credit_schedule: {
-    blog_draft: 2,
-    meta_rewrite: 1,
-    alt_tags_batch10: 1,
-    content_rewrite: 1,
-    content_audit: 5,
-    brand_voice_train: 10,
+    blog_draft: 10,
+    meta_rewrite: 2,
+    alt_tags_batch10: 2,
+    content_rewrite: 10,
+    content_audit: 25,
+    brand_voice_train: 20,
+    redirect_sweep: 5,
   },
 
   billing: {
