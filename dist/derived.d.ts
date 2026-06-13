@@ -73,12 +73,13 @@ export declare const APB: {
 };
 /** Shorthand: per-action AI credit cost schedule. */
 export declare const AI_CREDIT_SCHEDULE: {
-    readonly blog_draft: 2;
-    readonly meta_rewrite: 1;
-    readonly alt_tags_batch10: 1;
-    readonly content_rewrite: 1;
-    readonly content_audit: 5;
-    readonly brand_voice_train: 10;
+    readonly blog_draft: 10;
+    readonly meta_rewrite: 2;
+    readonly alt_tags_batch10: 2;
+    readonly content_rewrite: 10;
+    readonly content_audit: 25;
+    readonly brand_voice_train: 20;
+    readonly redirect_sweep: 5;
 };
 /** Shorthand: notify-and-upgrade thresholds (`warn`, `soft_cap`). */
 export declare const THRESHOLDS: {

@@ -95,12 +95,13 @@ export declare const PRICING: {
         readonly claim_window_days: 30;
     };
     readonly ai_credit_schedule: {
-        readonly blog_draft: 2;
-        readonly meta_rewrite: 1;
-        readonly alt_tags_batch10: 1;
-        readonly content_rewrite: 1;
-        readonly content_audit: 5;
-        readonly brand_voice_train: 10;
+        readonly blog_draft: 10;
+        readonly meta_rewrite: 2;
+        readonly alt_tags_batch10: 2;
+        readonly content_rewrite: 10;
+        readonly content_audit: 25;
+        readonly brand_voice_train: 20;
+        readonly redirect_sweep: 5;
     };
     readonly billing: {
         readonly dunning_retries: 3;
