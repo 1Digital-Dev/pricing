@@ -12,6 +12,7 @@ export declare const PRICING: {
             readonly strategy_hours_mo: 0;
             readonly posture: "guided";
             readonly sla: false;
+            readonly max_cms_pages: 3;
         };
         readonly managed: {
             readonly price_mo: 199;
@@ -25,6 +26,7 @@ export declare const PRICING: {
             readonly strategy_hours_mo: 1;
             readonly posture: "accompanied";
             readonly sla: true;
+            readonly max_cms_pages: 20;
         };
         readonly white_glove: {
             readonly price_mo: 449;
@@ -38,6 +40,7 @@ export declare const PRICING: {
             readonly strategy_hours_mo: 1;
             readonly posture: "led";
             readonly sla: true;
+            readonly max_cms_pages: 50;
         };
     };
     readonly ai_visibility: {
@@ -65,6 +68,8 @@ export declare const PRICING: {
         readonly extra_seat_mo: 15;
         readonly extra_domain_mo: 25;
         readonly reactivation_fee: 49;
+        readonly cms_page_mo: 15;
+        readonly cms_page_hard_cap: 75;
     };
     readonly thresholds: {
         readonly warn: 0.8;
@@ -75,6 +80,7 @@ export declare const PRICING: {
         readonly max_pages: 500;
         readonly max_storage_gb: 25;
         readonly max_deploys_day: 50;
+        readonly blog_posts_note: "Unlimited blog posts on all plans, subject to plan storage allowance. Blog posts do not count toward CMS page caps.";
     };
     readonly sla: {
         readonly target: 0.999;
@@ -145,9 +151,9 @@ export declare const PRICING: {
         readonly governing_law: "State of Florida, USA";
         readonly support_timezone: "America/New_York";
         readonly versions: {
-            readonly terms: "1.0";
+            readonly terms: "1.1";
             readonly aup: "1.0";
-            readonly fair_use: "1.0";
+            readonly fair_use: "1.1";
             readonly sla: "1.0";
             readonly privacy: "1.0";
         };

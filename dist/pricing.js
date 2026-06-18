@@ -5,6 +5,14 @@
 // Change a value once → it propagates everywhere. Do not hard-code these anywhere else.
 //
 // Effective: Jun 13, 2026 · v1.4 (AI credit schedule update)
+//
+//   v0.3.0 (2026-06-17) — CMS page caps per tier:
+//     • max_cms_pages added to each plan: essentials=3, managed=20, white_glove=50
+//     • overage.cms_page_mo: $15/page/month for white_glove clients above 50 pages
+//     • overage.cms_page_hard_cap: 75 (above this → custom quote required)
+//     • fair_use.blog_posts_note: blog posts are unlimited, not counted toward page cap
+//     • legal.versions: terms → 1.1, fair_use → 1.1
+//     • Blog posts (tenant_posts) are explicitly excluded from page cap counting
 //   Decisions (full rationale in docs/superpowers/specs/2026-06-02-pricing-v1.3-design.md):
 //
 //   Plans:
@@ -57,9 +65,9 @@ export const PRICING = {
         // stays at 200 -- right-sized today. Per-action schedule + $0.10/
         // credit overage rate unchanged. Full rationale + worst-case-COGS math
         // in the strategy-pass report from 2026-06-04.
-        essentials: { price_mo: 89, price_yr: 890, hosted: true, bandwidth_gb: 10, ai_credits: 200, seats: 2, domains: 1, support_hrs: 1, strategy_hours_mo: 0, posture: "guided", sla: false },
-        managed: { price_mo: 199, price_yr: 2388, hosted: true, bandwidth_gb: 25, ai_credits: 700, seats: 5, domains: 1, support_hrs: 2, strategy_hours_mo: 1, posture: "accompanied", sla: true },
-        white_glove: { price_mo: 449, price_yr: 5388, hosted: true, bandwidth_gb: 100, ai_credits: 1800, seats: 10, domains: 3, support_hrs: 4, strategy_hours_mo: 1, posture: "led", sla: true },
+        essentials: { price_mo: 89, price_yr: 890, hosted: true, bandwidth_gb: 10, ai_credits: 200, seats: 2, domains: 1, support_hrs: 1, strategy_hours_mo: 0, posture: "guided", sla: false, max_cms_pages: 3 },
+        managed: { price_mo: 199, price_yr: 2388, hosted: true, bandwidth_gb: 25, ai_credits: 700, seats: 5, domains: 1, support_hrs: 2, strategy_hours_mo: 1, posture: "accompanied", sla: true, max_cms_pages: 20 },
+        white_glove: { price_mo: 449, price_yr: 5388, hosted: true, bandwidth_gb: 100, ai_credits: 1800, seats: 10, domains: 3, support_hrs: 4, strategy_hours_mo: 1, posture: "led", sla: true, max_cms_pages: 50 },
     },
     // AI Visibility tracker caps — enforced server-side per calendar month.
     // Cost-cap enforcement today is GLOBAL (lib/ai-visibility/cost-tracker.ts);
@@ -89,9 +97,11 @@ export const PRICING = {
         extra_seat_mo: 15,
         extra_domain_mo: 25,
         reactivation_fee: 49,
+        cms_page_mo: 15, // $15/page/month for Premium (white_glove) clients above 50 pages
+        cms_page_hard_cap: 75, // above this → block, require custom quote
     },
     thresholds: { warn: 0.80, soft_cap: 1.00, hard_cap: 1.50 }, // fraction of allowance
-    fair_use: { max_pages: 500, max_storage_gb: 25, max_deploys_day: 50 },
+    fair_use: { max_pages: 500, max_storage_gb: 25, max_deploys_day: 50, blog_posts_note: "Unlimited blog posts on all plans, subject to plan storage allowance. Blog posts do not count toward CMS page caps." },
     sla: {
         target: 0.999,
         credits: [
@@ -187,7 +197,7 @@ export const PRICING = {
     legal: {
         governing_law: "State of Florida, USA",
         support_timezone: "America/New_York", // Eastern Time
-        versions: { terms: "1.0", aup: "1.0", fair_use: "1.0", sla: "1.0", privacy: "1.0" },
+        versions: { terms: "1.1", aup: "1.0", fair_use: "1.1", sla: "1.0", privacy: "1.0" },
     },
 };
 //# sourceMappingURL=pricing.js.map
