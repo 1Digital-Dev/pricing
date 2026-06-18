@@ -6,6 +6,10 @@
 //
 // Effective: Jun 13, 2026 · v1.4 (AI credit schedule update)
 //
+//   v0.3.1 (2026-06-17) — Enhanced Skills plan-gating:
+//     • features.enhanced_skills: new block — auto-enabled for white_glove tier
+//     • label, description, credit_note, capabilities documented as marketing source-of-truth
+//     • All three repos (workspacecms.ai, 1digitalagency.com, dashboard) consume this block
 //   v0.3.0 (2026-06-17) — CMS page caps per tier:
 //     • max_cms_pages added to each plan: essentials=3, managed=20, white_glove=50
 //     • overage.cms_page_mo: $15/page/month for white_glove clients above 50 pages
@@ -205,6 +209,26 @@ export const PRICING = {
     intelligence_report_quarterly_retail_usd: 1500,
     free_build_pages: 10,
     free_build_retail_usd: 7500,
+  },
+
+  // Plan-gated features — capabilities that are automatically enabled or locked
+  // based on plan tier. Consumed by the dashboard (enhanced-skills-context.tsx)
+  // and by marketing copy (pricing grid, compare table).
+  //
+  // credit_note: displayed alongside the feature in the UI as a fair-use warning.
+  // plans: tiers that get this feature automatically, no manual flag needed.
+  features: {
+    enhanced_skills: {
+      plans: ['white_glove'] as const,
+      label: "AI-Powered SEO Automation",
+      description: "Auto-fix SEO audit issues, generate JSON-LD schema from page content, and run AI-driven internal linking sweeps — directly from your dashboard.",
+      credit_note: "Each automated action draws from your monthly AI credit allowance. Premium includes 1,800 credits/month.",
+      capabilities: [
+        "SEO Audit AI Fix — auto-remediate audit findings in one click",
+        "Schema Generator — AI-generated JSON-LD structured data from your content",
+        "Internal Linking AI Sweep — automated internal link building across your site",
+      ] as const,
+    },
   },
 
   legal: {
