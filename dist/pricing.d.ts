@@ -2,7 +2,7 @@ export declare const PRICING: {
     readonly plans: {
         readonly essentials: {
             readonly price_mo: 89;
-            readonly price_yr: 890;
+            readonly price_yr: 1068;
             readonly hosted: true;
             readonly bandwidth_gb: 10;
             readonly ai_credits: 200;
@@ -146,6 +146,15 @@ export declare const PRICING: {
         readonly intelligence_report_quarterly_retail_usd: 1500;
         readonly free_build_pages: 10;
         readonly free_build_retail_usd: 7500;
+    };
+    readonly features: {
+        readonly enhanced_skills: {
+            readonly plans: readonly ["white_glove"];
+            readonly label: "AI-Powered SEO Automation";
+            readonly description: "Auto-fix SEO audit issues, generate JSON-LD schema from page content, and run AI-driven internal linking sweeps — directly from your dashboard.";
+            readonly credit_note: "Each automated action draws from your monthly AI credit allowance. Premium includes 1,800 credits/month.";
+            readonly capabilities: readonly ["SEO Audit AI Fix — auto-remediate audit findings in one click", "Schema Generator — AI-generated JSON-LD structured data from your content", "Internal Linking AI Sweep — automated internal link building across your site"];
+        };
     };
     readonly legal: {
         readonly governing_law: "State of Florida, USA";

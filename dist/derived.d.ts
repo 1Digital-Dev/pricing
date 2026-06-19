@@ -2,7 +2,7 @@
 export declare const P: {
     readonly essentials: {
         readonly price_mo: 89;
-        readonly price_yr: 890;
+        readonly price_yr: 1068;
         readonly hosted: true;
         readonly bandwidth_gb: 10;
         readonly ai_credits: 200;

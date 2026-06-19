@@ -6,6 +6,10 @@
 //
 // Effective: Jun 13, 2026 · v1.4 (AI credit schedule update)
 //
+//   v0.3.2 (2026-06-19) — Essentials annual price corrected:
+//     • essentials.price_yr: 890 → 1068 (12 × $89/mo = $1,068/yr; 890 was bad math)
+//     • cms-platform/page.tsx override (priceAnnual: 1068) can now be removed
+//
 //   v0.3.1 (2026-06-17) — Enhanced Skills plan-gating:
 //     • features.enhanced_skills: new block — auto-enabled for white_glove tier
 //     • label, description, credit_note, capabilities documented as marketing source-of-truth
@@ -70,7 +74,7 @@ export const PRICING = {
     // stays at 200 -- right-sized today. Per-action schedule + $0.10/
     // credit overage rate unchanged. Full rationale + worst-case-COGS math
     // in the strategy-pass report from 2026-06-04.
-    essentials:  { price_mo: 89,  price_yr: 890,  hosted: true,  bandwidth_gb: 10,   ai_credits: 200,  seats: 2,  domains: 1, support_hrs: 1, strategy_hours_mo: 0, posture: "guided",      sla: false, max_cms_pages: 3  },
+    essentials:  { price_mo: 89,  price_yr: 1068, hosted: true,  bandwidth_gb: 10,   ai_credits: 200,  seats: 2,  domains: 1, support_hrs: 1, strategy_hours_mo: 0, posture: "guided",      sla: false, max_cms_pages: 3  },
     managed:     { price_mo: 199, price_yr: 2388, hosted: true,  bandwidth_gb: 25,   ai_credits: 700,  seats: 5,  domains: 1, support_hrs: 2, strategy_hours_mo: 1, posture: "accompanied", sla: true,  max_cms_pages: 20 },
     white_glove: { price_mo: 449, price_yr: 5388, hosted: true,  bandwidth_gb: 100,  ai_credits: 1800, seats: 10, domains: 3, support_hrs: 4, strategy_hours_mo: 1, posture: "led",         sla: true,  max_cms_pages: 50 },
   },
