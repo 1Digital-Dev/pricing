@@ -1,0 +1,18 @@
+#!/bin/sh
+# Secret scanner — blocks commits that contain hardcoded credentials.
+# Install once: cp .hooks/pre-commit .git/hooks/pre-commit && chmod +x .git/hooks/pre-commit
+# Requires gitleaks: brew install gitleaks
+
+if command -v gitleaks > /dev/null 2>&1; then
+  gitleaks protect --staged --redact --config .gitleaks.toml --verbose
+  if [ $? -ne 0 ]; then
+    echo ""
+    echo "❌  gitleaks found secrets in staged files. Commit blocked."
+    echo "   Remove the secret and use environment variables instead."
+    exit 1
+  fi
+else
+  echo "⚠️  gitleaks not installed — secret scan skipped."
+  echo "   Install with: brew install gitleaks"
+  echo "   Then run:     cp .hooks/pre-commit .git/hooks/pre-commit && chmod +x .git/hooks/pre-commit"
+fi

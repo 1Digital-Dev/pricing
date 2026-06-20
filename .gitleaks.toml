@@ -1,0 +1,13 @@
+title = "1Digital gitleaks config"
+
+[extend]
+useDefault = true
+
+[allowlist]
+description = "Global allowlist"
+paths = [
+  '''.gitleaks\.toml''',
+  '''pnpm-lock\.yaml''',
+  '''package-lock\.json''',
+  '''\.env\.example''',
+]
