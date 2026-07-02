@@ -130,12 +130,16 @@ export declare const PRICING: {
         readonly white_glove_days: null;
     };
     readonly annual_prepay_build: {
+        readonly essentials: {
+            readonly pages: 3;
+            readonly retail_usd: 1500;
+        };
         readonly managed: {
-            readonly pages: 5;
+            readonly pages: 7;
             readonly retail_usd: 3500;
         };
         readonly white_glove: {
-            readonly pages: 10;
+            readonly pages: 12;
             readonly retail_usd: 7500;
         };
     };

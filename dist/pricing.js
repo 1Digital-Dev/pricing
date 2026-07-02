@@ -185,8 +185,13 @@ export const PRICING = {
     // White-Glove tier the same free build is also part of the founding
     // bundle below — the cohort just gets it without needing annual prepay.
     annual_prepay_build: {
-        managed: { pages: 5, retail_usd: 3500 },
-        white_glove: { pages: 10, retail_usd: 7500 },
+        // 2026-07-02 (v0.3.3): page counts synced to the live product — free
+        // builds are 3 (Essentials, added), 7 (Growth), 12 (Premium). The old
+        // 5/10 values predated the free-build-on-every-plan offer and were
+        // being shimmed locally in 1digital-sites/config/pricing.config.ts.
+        essentials: { pages: 3, retail_usd: 1500 },
+        managed: { pages: 7, retail_usd: 3500 },
+        white_glove: { pages: 12, retail_usd: 7500 },
     },
     // Founding-member bundle for the first 25 White-Glove customers. v1.3:
     // benefit #3 ("Direct founder line") replaced with "+2 support hrs/mo for
