@@ -5,8 +5,8 @@ export declare const P: {
         readonly price_yr: 1068;
         readonly hosted: true;
         readonly bandwidth_gb: 10;
-        readonly ai_credits: 200;
-        readonly seats: 2;
+        readonly ai_credits: 100;
+        readonly seats: 1;
         readonly domains: 1;
         readonly support_hrs: 1;
         readonly strategy_hours_mo: 0;
@@ -19,8 +19,8 @@ export declare const P: {
         readonly price_yr: 2388;
         readonly hosted: true;
         readonly bandwidth_gb: 25;
-        readonly ai_credits: 700;
-        readonly seats: 5;
+        readonly ai_credits: 400;
+        readonly seats: 2;
         readonly domains: 1;
         readonly support_hrs: 2;
         readonly strategy_hours_mo: 1;
@@ -33,8 +33,8 @@ export declare const P: {
         readonly price_yr: 5388;
         readonly hosted: true;
         readonly bandwidth_gb: 100;
-        readonly ai_credits: 1800;
-        readonly seats: 10;
+        readonly ai_credits: 1200;
+        readonly seats: 4;
         readonly domains: 3;
         readonly support_hrs: 4;
         readonly strategy_hours_mo: 1;
