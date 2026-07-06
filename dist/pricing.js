@@ -95,8 +95,12 @@ export const PRICING = {
     // (5/15/30) is the real differentiator and the cadence variation was
     // muddying the comparison. Unified to monthly across all tiers.
     ai_visibility: {
-        essentials: { prompts_tracked: 5, runs_per_month: 1, cadence: "monthly" },
-        managed: { prompts_tracked: 15, runs_per_month: 1, cadence: "monthly" },
+        // 2026-07-06 v0.5.0 — AI Visibility Tracking is PREMIUM-ONLY (enforced by the
+        // dashboard tier-flags). Essentials/Growth prompt allocations zeroed so the
+        // source of truth matches what's delivered; they were vestigial and no
+        // customer surface reads them.
+        essentials: { prompts_tracked: 0, runs_per_month: 0, cadence: "monthly" },
+        managed: { prompts_tracked: 0, runs_per_month: 0, cadence: "monthly" },
         white_glove: { prompts_tracked: 30, runs_per_month: 1, cadence: "monthly" },
         // Internal-only safeguards. Raised global ceiling to cover full 25-WG
         // cohort at realistic worst-case burn (~$12/mo per WG tenant × 25 = $300)

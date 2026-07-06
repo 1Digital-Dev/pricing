@@ -45,13 +45,13 @@ export declare const PRICING: {
     };
     readonly ai_visibility: {
         readonly essentials: {
-            readonly prompts_tracked: 5;
-            readonly runs_per_month: 1;
+            readonly prompts_tracked: 0;
+            readonly runs_per_month: 0;
             readonly cadence: "monthly";
         };
         readonly managed: {
-            readonly prompts_tracked: 15;
-            readonly runs_per_month: 1;
+            readonly prompts_tracked: 0;
+            readonly runs_per_month: 0;
             readonly cadence: "monthly";
         };
         readonly white_glove: {
