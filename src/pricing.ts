@@ -6,6 +6,19 @@
 //
 // Effective: Jun 13, 2026 · v1.4 (AI credit schedule update)
 //
+//   v0.6.0 (2026-07-26) — CMS page caps + $15/page overage RETIRED:
+//     • overage.cms_page_mo: 15 → 0 ($15/page/month page overage retired;
+//       Stripe page-overage metering is now a no-op in the dashboard)
+//     • overage.cms_page_hard_cap: retained as a key for back-compat but NO
+//       LONGER ENFORCED — CMS pages are unlimited on every plan, subject to
+//       the Fair Use Policy (fair_use.max_pages soft limit still applies)
+//     • plans.*.max_cms_pages: retained as an informational reference only
+//       (formerly the per-tier hard cap) — consumers no longer block on it
+//     • fair_use.blog_posts_note: reworded — no "page cap" concept remains
+//     • Marketing (workspacecms.ai) + dashboard both updated in lockstep;
+//       Terms bumped (site v2.1-2026-07-26, dashboard BILLING_TERMS_VERSION
+//       2026-07-26). Consumers should bump to this package version.
+//
 //   v0.3.2 (2026-06-19) — Essentials annual price corrected:
 //     • essentials.price_yr: 890 → 1068 (12 × $89/mo = $1,068/yr; 890 was bad math)
 //     • cms-platform/page.tsx override (priceAnnual: 1068) can now be removed
@@ -121,13 +134,13 @@ export const PRICING = {
     extra_seat_mo: 15,
     extra_domain_mo: 25,
     reactivation_fee: 49,
-    cms_page_mo: 15,          // $15/page/month for Premium (white_glove) clients above 50 pages
-    cms_page_hard_cap: 75,    // above this → block, require custom quote
+    cms_page_mo: 0,           // RETIRED 2026-07-26 — no per-page overage; CMS pages are unlimited
+    cms_page_hard_cap: 75,    // RETIRED 2026-07-26 — no longer enforced (kept for back-compat); pages unlimited under fair use
   },
 
   thresholds: { warn: 0.80, soft_cap: 1.00, hard_cap: 1.50 }, // fraction of allowance
 
-  fair_use: { max_pages: 500, max_storage_gb: 25, max_deploys_day: 50, blog_posts_note: "Unlimited blog posts on all plans, subject to plan storage allowance. Blog posts do not count toward CMS page caps." },
+  fair_use: { max_pages: 500, max_storage_gb: 25, max_deploys_day: 50, blog_posts_note: "Unlimited blog posts on all plans, subject to plan storage allowance. CMS pages are unlimited too; blog posts are tracked separately from CMS pages." },
 
   sla: {
     target: 0.999,
