@@ -68,7 +68,7 @@ export declare const PRICING: {
         readonly extra_seat_mo: 15;
         readonly extra_domain_mo: 25;
         readonly reactivation_fee: 49;
-        readonly cms_page_mo: 15;
+        readonly cms_page_mo: 0;
         readonly cms_page_hard_cap: 75;
     };
     readonly thresholds: {
@@ -80,7 +80,7 @@ export declare const PRICING: {
         readonly max_pages: 500;
         readonly max_storage_gb: 25;
         readonly max_deploys_day: 50;
-        readonly blog_posts_note: "Unlimited blog posts on all plans, subject to plan storage allowance. Blog posts do not count toward CMS page caps.";
+        readonly blog_posts_note: "Unlimited blog posts on all plans, subject to plan storage allowance. CMS pages are unlimited too; blog posts are tracked separately from CMS pages.";
     };
     readonly sla: {
         readonly target: 0.999;
