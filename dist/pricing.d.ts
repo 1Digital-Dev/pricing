@@ -9,6 +9,7 @@ export declare const PRICING: {
             readonly seats: 1;
             readonly domains: 1;
             readonly support_hrs: 1;
+            readonly change_sla_days: 4;
             readonly strategy_hours_mo: 0;
             readonly posture: "guided";
             readonly sla: false;
@@ -23,6 +24,7 @@ export declare const PRICING: {
             readonly seats: 2;
             readonly domains: 1;
             readonly support_hrs: 2;
+            readonly change_sla_days: 2;
             readonly strategy_hours_mo: 1;
             readonly posture: "accompanied";
             readonly sla: true;
@@ -37,6 +39,7 @@ export declare const PRICING: {
             readonly seats: 4;
             readonly domains: 3;
             readonly support_hrs: 4;
+            readonly change_sla_days: 1;
             readonly strategy_hours_mo: 1;
             readonly posture: "led";
             readonly sla: true;

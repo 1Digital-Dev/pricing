@@ -82,3 +82,28 @@ export function formatAuditLogRetention(days: number | null): string {
   }
   return `${days} days`;
 }
+
+/**
+ * Change-turnaround formatter: business days → display string.
+ * `4` → "4 business days"; `1` → "1 business day".
+ *
+ * Added v0.7.0. This figure used to live as hand-typed prose in each
+ * consumer and drifted — 1digitalagency.com/cms-platform advertised a
+ * Premium turnaround of "12-24 hrs" while workspacecms.ai promised
+ * "1 business day" everywhere. "12-24 hours" spans overnight and implies
+ * weekend coverage; a business day does not, so one product was publicly
+ * committing us to an SLA we do not deliver.
+ *
+ * Read the number from `P.<tier>.change_sla_days` and format it here —
+ * never re-type the figure in a consumer.
+ */
+export function changeTurnaround(businessDays: number): string {
+  return `${businessDays} business ${businessDays === 1 ? "day" : "days"}`;
+}
+
+/** Convenience: the formatted change turnaround per tier. */
+export const CHANGE_TURNAROUND = {
+  essentials: changeTurnaround(P.essentials.change_sla_days),
+  managed: changeTurnaround(P.managed.change_sla_days),
+  white_glove: changeTurnaround(P.white_glove.change_sla_days),
+} as const;
