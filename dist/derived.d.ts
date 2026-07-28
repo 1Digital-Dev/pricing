@@ -9,6 +9,7 @@ export declare const P: {
         readonly seats: 1;
         readonly domains: 1;
         readonly support_hrs: 1;
+        readonly change_sla_days: 4;
         readonly strategy_hours_mo: 0;
         readonly posture: "guided";
         readonly sla: false;
@@ -23,6 +24,7 @@ export declare const P: {
         readonly seats: 2;
         readonly domains: 1;
         readonly support_hrs: 2;
+        readonly change_sla_days: 2;
         readonly strategy_hours_mo: 1;
         readonly posture: "accompanied";
         readonly sla: true;
@@ -37,6 +39,7 @@ export declare const P: {
         readonly seats: 4;
         readonly domains: 3;
         readonly support_hrs: 4;
+        readonly change_sla_days: 1;
         readonly strategy_hours_mo: 1;
         readonly posture: "led";
         readonly sla: true;
@@ -145,4 +148,25 @@ export declare const APB_WG_PER_PAGE_USD: number;
  * stays for the dashboard's enforcement display + any future restore.
  */
 export declare function formatAuditLogRetention(days: number | null): string;
+/**
+ * Change-turnaround formatter: business days → display string.
+ * `4` → "4 business days"; `1` → "1 business day".
+ *
+ * Added v0.7.0. This figure used to live as hand-typed prose in each
+ * consumer and drifted — 1digitalagency.com/cms-platform advertised a
+ * Premium turnaround of "12-24 hrs" while workspacecms.ai promised
+ * "1 business day" everywhere. "12-24 hours" spans overnight and implies
+ * weekend coverage; a business day does not, so one product was publicly
+ * committing us to an SLA we do not deliver.
+ *
+ * Read the number from `P.<tier>.change_sla_days` and format it here —
+ * never re-type the figure in a consumer.
+ */
+export declare function changeTurnaround(businessDays: number): string;
+/** Convenience: the formatted change turnaround per tier. */
+export declare const CHANGE_TURNAROUND: {
+    readonly essentials: string;
+    readonly managed: string;
+    readonly white_glove: string;
+};
 //# sourceMappingURL=derived.d.ts.map

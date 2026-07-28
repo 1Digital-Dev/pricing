@@ -6,6 +6,24 @@
 //
 // Effective: Jun 13, 2026 · v1.4 (AI credit schedule update)
 //
+//   v0.7.0 (2026-07-28) — change-turnaround SLA hoisted into the package:
+//     • plans.*.change_sla_days: NEW — business days to deliver a standard
+//       ticketed change (4 / 2 / 1). Previously this number existed ONLY as
+//       hand-written prose in each consumer, with nothing keeping them in
+//       sync, and it drifted: 1digitalagency.com/cms-platform advertised a
+//       Premium turnaround of "12-24 hrs" while workspacecms.ai promised
+//       "1 business day" on /pricing, /premium and /plans. 12-24 hours spans
+//       overnight and implies weekend coverage; a business day does not — so
+//       one product was publicly committing to a faster SLA than we deliver.
+//     • derived.changeTurnaround(): NEW — formats the number for display
+//       ("4 business days" / "1 business day"), so consumers never re-derive
+//       the pluralisation or re-type the figure.
+//     • NOTE: emergency-response windows (Essentials 1 business day, Growth
+//       8 business hours, Premium 4 business hours) are still per-consumer
+//       prose and remain a drift risk. They mix units (days vs hours), so
+//       modelling them is a deliberate follow-up rather than a silent
+//       widening of this change.
+//
 //   v0.6.0 (2026-07-26) — CMS page caps + $15/page overage RETIRED:
 //     • overage.cms_page_mo: 15 → 0 ($15/page/month page overage retired;
 //       Stripe page-overage metering is now a no-op in the dashboard)
@@ -95,9 +113,9 @@ export const PRICING = {
         // 1digital-new-site); this bump folds them into the shared source so the
         // overrides can be deleted. Per-action credit schedule + overage rates
         // unchanged.
-        essentials: { price_mo: 89, price_yr: 1068, hosted: true, bandwidth_gb: 10, ai_credits: 100, seats: 1, domains: 1, support_hrs: 1, strategy_hours_mo: 0, posture: "guided", sla: false, max_cms_pages: 3 },
-        managed: { price_mo: 199, price_yr: 2388, hosted: true, bandwidth_gb: 25, ai_credits: 400, seats: 2, domains: 1, support_hrs: 2, strategy_hours_mo: 1, posture: "accompanied", sla: true, max_cms_pages: 20 },
-        white_glove: { price_mo: 449, price_yr: 5388, hosted: true, bandwidth_gb: 100, ai_credits: 1200, seats: 4, domains: 3, support_hrs: 4, strategy_hours_mo: 1, posture: "led", sla: true, max_cms_pages: 50 },
+        essentials: { price_mo: 89, price_yr: 1068, hosted: true, bandwidth_gb: 10, ai_credits: 100, seats: 1, domains: 1, support_hrs: 1, change_sla_days: 4, strategy_hours_mo: 0, posture: "guided", sla: false, max_cms_pages: 3 },
+        managed: { price_mo: 199, price_yr: 2388, hosted: true, bandwidth_gb: 25, ai_credits: 400, seats: 2, domains: 1, support_hrs: 2, change_sla_days: 2, strategy_hours_mo: 1, posture: "accompanied", sla: true, max_cms_pages: 20 },
+        white_glove: { price_mo: 449, price_yr: 5388, hosted: true, bandwidth_gb: 100, ai_credits: 1200, seats: 4, domains: 3, support_hrs: 4, change_sla_days: 1, strategy_hours_mo: 1, posture: "led", sla: true, max_cms_pages: 50 },
     },
     // AI Visibility tracker caps — enforced server-side per calendar month.
     // Cost-cap enforcement today is GLOBAL (lib/ai-visibility/cost-tracker.ts);
