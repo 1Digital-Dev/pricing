@@ -8,7 +8,6 @@ export declare const PRICING: {
             readonly ai_credits: 100;
             readonly seats: 1;
             readonly domains: 1;
-            readonly support_hrs: 1;
             readonly change_sla_days: 4;
             readonly strategy_hours_mo: 0;
             readonly posture: "guided";
@@ -23,7 +22,6 @@ export declare const PRICING: {
             readonly ai_credits: 400;
             readonly seats: 2;
             readonly domains: 1;
-            readonly support_hrs: 2;
             readonly change_sla_days: 2;
             readonly strategy_hours_mo: 1;
             readonly posture: "accompanied";
@@ -38,7 +36,6 @@ export declare const PRICING: {
             readonly ai_credits: 1200;
             readonly seats: 4;
             readonly domains: 3;
-            readonly support_hrs: 4;
             readonly change_sla_days: 1;
             readonly strategy_hours_mo: 1;
             readonly posture: "led";
@@ -145,14 +142,6 @@ export declare const PRICING: {
             readonly pages: 12;
             readonly retail_usd: 7500;
         };
-    };
-    readonly founding_member: {
-        readonly cohort_cap: 25;
-        readonly extra_support_hrs_mo: 2;
-        readonly extra_support_hrs_window_days: 90;
-        readonly intelligence_report_quarterly_retail_usd: 1500;
-        readonly free_build_pages: 10;
-        readonly free_build_retail_usd: 7500;
     };
     readonly features: {
         readonly enhanced_skills: {
