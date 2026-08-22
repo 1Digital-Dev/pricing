@@ -89,11 +89,12 @@ export const PRICING = {
         //   led         = "we run it as your team — we drive strategy and execution"
         //
         // strategy_hours_mo: monthly strategy time (SEO consulting OR copywriting,
-        //   client's choice). DISTINCT from support_hrs (operational break-fixes
-        //   and ticketed updates). Essentials = 0 (30-min kickoff covers
-        //   relationship start). Managed and White-Glove both = 1 hr flat — WG's
-        //   value premium over Managed is paid in support hrs / AI credits / seats /
-        //   bandwidth / AI-visibility cadence, not in strategist time.
+        //   client's choice). DISTINCT from platform support (operational
+        //   break-fixes and ticketed updates), which is UNMETERED on every tier
+        //   as of v0.8.0. Essentials = 0 (30-min kickoff covers relationship
+        //   start). Managed and White-Glove both = 1 hr flat — WG's value premium
+        //   over Managed is paid in AI credits / seats / bandwidth / turnaround /
+        //   AI-visibility cadence, not in strategist time.
         // 2026-06-04 v0.2.0 — margin-tightening pass (strategy review). Growth
         // + Premium AI-credit caps dropped from 1,000 -> 700 and 2,500 -> 1,800
         // respectively. The previous allowances were over-provisioned by ~3x
@@ -104,6 +105,16 @@ export const PRICING = {
         // stays at 200 -- right-sized today. Per-action schedule + $0.10/
         // credit overage rate unchanged. Full rationale + worst-case-COGS math
         // in the strategy-pass report from 2026-06-04.
+        // 2026-08-22 v0.8.0 — plans.*.support_hrs REMOVED. Platform support is
+        // full and unmetered on every paid tier (Dan): anything inside
+        // WorkspaceCMS is supported for as long as it takes, and only third-party
+        // systems we don't run stay outside it. Tiers differ on RESPONSE SPEED
+        // (change_sla_days) and never on how much help you get. The field was
+        // deleted rather than zeroed because a 0 reads as "no support included",
+        // which is the opposite of the policy. No consumer read it at the time of
+        // removal — the dashboard dropped its last reader in
+        // v0-1-digital-ai-dashboard#6251, and neither 1digital-sites nor
+        // 1digital-new-site ever referenced it.
         // 2026-07-05 v0.4.0 — seat + AI-credit right-sizing. Seats trimmed to
         // 1/2/4 (was 2/5/10) with additional seats a Premium-only $15/seat/mo
         // add-on; monthly AI credits trimmed to 100/400/1,200 (was 200/700/1,800)
@@ -113,9 +124,9 @@ export const PRICING = {
         // 1digital-new-site); this bump folds them into the shared source so the
         // overrides can be deleted. Per-action credit schedule + overage rates
         // unchanged.
-        essentials: { price_mo: 89, price_yr: 1068, hosted: true, bandwidth_gb: 10, ai_credits: 100, seats: 1, domains: 1, support_hrs: 1, change_sla_days: 4, strategy_hours_mo: 0, posture: "guided", sla: false, max_cms_pages: 3 },
-        managed: { price_mo: 199, price_yr: 2388, hosted: true, bandwidth_gb: 25, ai_credits: 400, seats: 2, domains: 1, support_hrs: 2, change_sla_days: 2, strategy_hours_mo: 1, posture: "accompanied", sla: true, max_cms_pages: 20 },
-        white_glove: { price_mo: 449, price_yr: 5388, hosted: true, bandwidth_gb: 100, ai_credits: 1200, seats: 4, domains: 3, support_hrs: 4, change_sla_days: 1, strategy_hours_mo: 1, posture: "led", sla: true, max_cms_pages: 50 },
+        essentials: { price_mo: 89, price_yr: 1068, hosted: true, bandwidth_gb: 10, ai_credits: 100, seats: 1, domains: 1, change_sla_days: 4, strategy_hours_mo: 0, posture: "guided", sla: false, max_cms_pages: 3 },
+        managed: { price_mo: 199, price_yr: 2388, hosted: true, bandwidth_gb: 25, ai_credits: 400, seats: 2, domains: 1, change_sla_days: 2, strategy_hours_mo: 1, posture: "accompanied", sla: true, max_cms_pages: 20 },
+        white_glove: { price_mo: 449, price_yr: 5388, hosted: true, bandwidth_gb: 100, ai_credits: 1200, seats: 4, domains: 3, change_sla_days: 1, strategy_hours_mo: 1, posture: "led", sla: true, max_cms_pages: 50 },
     },
     // AI Visibility tracker caps — enforced server-side per calendar month.
     // Cost-cap enforcement today is GLOBAL (lib/ai-visibility/cost-tracker.ts);
@@ -241,8 +252,15 @@ export const PRICING = {
     // benefit #3 ("Direct founder line") replaced with "+2 support hrs/mo for
     // first 90 days" — founder bandwidth doesn't scale to 25 simultaneous
     // direct-line relationships, and extra support hours are a better-aligned
-    // retention lever during the first quarter. WG support_hrs of 4/mo becomes
-    // effectively 6/mo for founding members during Q1.
+    // retention lever during the first quarter.
+    //
+    // ⚠️ 2026-08-22: this perk is now MEANINGLESS and needs a replacement.
+    // Platform support became unmetered in v0.8.0, so "+2 support hrs/mo" adds
+    // nothing to an allowance that no longer exists. The values below are left
+    // untouched on purpose — retiring a benefit promised to 25 named customers
+    // is a business decision, not a cleanup. No consumer reads these two fields
+    // today, so nothing is currently advertising the perk.
+    //   extra_support_hrs_mo / extra_support_hrs_window_days
     founding_member: {
         cohort_cap: 25,
         extra_support_hrs_mo: 2,
