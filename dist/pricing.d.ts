@@ -143,14 +143,6 @@ export declare const PRICING: {
             readonly retail_usd: 7500;
         };
     };
-    readonly founding_member: {
-        readonly cohort_cap: 25;
-        readonly extra_support_hrs_mo: 2;
-        readonly extra_support_hrs_window_days: 90;
-        readonly intelligence_report_quarterly_retail_usd: 1500;
-        readonly free_build_pages: 10;
-        readonly free_build_retail_usd: 7500;
-    };
     readonly features: {
         readonly enhanced_skills: {
             readonly plans: readonly ["white_glove"];

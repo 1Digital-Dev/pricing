@@ -81,6 +81,10 @@
 //     app/_landing/sections.tsx): benefit #3 changed from "Direct founder line —
 //     first 90 days" to "+2 support hours per month — first 90 days" so WG
 //     founding members get 6 support hrs/mo in Q1, then settle to standard 4 hrs/mo.
+//     ^ SUPERSEDED 2026-08-22 (v0.8.0): the founding-member promotion has ended
+//       and `founding_member` is removed from this file. The renderer symbol
+//       named above no longer exists in 1digital-sites either. Kept as a dated
+//       record of what the package used to publish, not as current fact.
 export const PRICING = {
     plans: {
         // posture: human-involvement ladder from brief v1.1 §1.6
@@ -236,9 +240,9 @@ export const PRICING = {
     // authoritative source; marketing copy and JSON-LD interpolate.
     //
     // These cover the ANNUAL PREPAY perk specifically (the build replaces the
-    // cash discount on Managed and White-Glove monthly tiers). On the
-    // White-Glove tier the same free build is also part of the founding
-    // bundle below — the cohort just gets it without needing annual prepay.
+    // cash discount on Managed and White-Glove monthly tiers). (Until v0.8.0
+    // the White-Glove free build was also part of a founding-member bundle
+    // below; that promotion has ended and the block is gone.)
     annual_prepay_build: {
         // 2026-07-02 (v0.3.3): page counts synced to the live product — free
         // builds are 3 (Essentials, added), 7 (Growth), 12 (Premium). The old
@@ -248,27 +252,18 @@ export const PRICING = {
         managed: { pages: 7, retail_usd: 3500 },
         white_glove: { pages: 12, retail_usd: 7500 },
     },
-    // Founding-member bundle for the first 25 White-Glove customers. v1.3:
-    // benefit #3 ("Direct founder line") replaced with "+2 support hrs/mo for
-    // first 90 days" — founder bandwidth doesn't scale to 25 simultaneous
-    // direct-line relationships, and extra support hours are a better-aligned
-    // retention lever during the first quarter.
+    // 2026-08-22 v0.8.0 — `founding_member` REMOVED. The founding-member
+    // promotion (first 25 White-Glove customers: a larger free build, a
+    // quarterly intelligence report, and "+2 support hrs/mo for the first 90
+    // days") is no longer running (Dan). Removed outright rather than left as a
+    // dormant block: a published cohort_cap and retail values read as a live
+    // offer to anyone building from this package, and the support-hours half of
+    // it stopped meaning anything when platform support became unmetered in
+    // this same version. Nothing consumed it — an org-wide search found the
+    // definition here and prose only in dated planning docs.
     //
-    // ⚠️ 2026-08-22: this perk is now MEANINGLESS and needs a replacement.
-    // Platform support became unmetered in v0.8.0, so "+2 support hrs/mo" adds
-    // nothing to an allowance that no longer exists. The values below are left
-    // untouched on purpose — retiring a benefit promised to 25 named customers
-    // is a business decision, not a cleanup. No consumer reads these two fields
-    // today, so nothing is currently advertising the perk.
-    //   extra_support_hrs_mo / extra_support_hrs_window_days
-    founding_member: {
-        cohort_cap: 25,
-        extra_support_hrs_mo: 2,
-        extra_support_hrs_window_days: 90,
-        intelligence_report_quarterly_retail_usd: 1500,
-        free_build_pages: 10,
-        free_build_retail_usd: 7500,
-    },
+    // The free build it referenced is not lost: `annual_prepay_build` above is
+    // the live free-build offer, on every tier.
     // Plan-gated features — capabilities that are automatically enabled or locked
     // based on plan tier. Consumed by the dashboard (enhanced-skills-context.tsx)
     // and by marketing copy (pricing grid, compare table).
