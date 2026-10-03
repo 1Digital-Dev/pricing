@@ -47,7 +47,8 @@ export const APB_WG_USD = `$${APB.white_glove.retail_usd.toLocaleString()}`;
 /**
  * Essentials annual is structured as "pay for N months instead of 12".
  * Derive N from `price_yr / price_mo` so the copy can't drift if the
- * discount ratio changes. Today: $890 / $89 = 10 months billed → 2 months free.
+ * discount ratio changes. Today: $1,068 / $89 = 12 months billed → 0 free
+ * (annual is 12× monthly since v0.3.2; there is no annual discount).
  */
 export const ESSENTIALS_MONTHS_BILLED = Math.round(
   P.essentials.price_yr / P.essentials.price_mo,

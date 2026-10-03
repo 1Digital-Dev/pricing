@@ -62,7 +62,7 @@ When GitHub Packages publishing is set up, switch to:
 import { PRICING, P, APB, SLA_PCT, formatAuditLogRetention } from "@1digital/pricing";
 
 const growthPrice = P.managed.price_mo;        // 199
-const growthBuild = APB.managed.pages;          // 5
+const growthBuild = APB.managed.pages;          // 7
 const slaTarget  = SLA_PCT;                     // "99.9"
 const audit      = formatAuditLogRetention(365); // "1 year"
 ```

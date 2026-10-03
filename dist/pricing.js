@@ -6,6 +6,25 @@
 //
 // Effective: Jun 13, 2026 · v1.4 (AI credit schedule update)
 //
+//   v0.9.0 (2026-10-03) — package caught up with what the dashboard enforces:
+//     • plans.*.max_cms_pages: 3/20/50 → 10/25/null (null = no limit). Page
+//       caps came back on 2026-09-22 (dashboard config/pricing.config.ts and
+//       docs/cross-repo/cms-page-cap-contract.md). Type is now number | null.
+//     • fair_use.blog_posts_note: "CMS pages are unlimited too" removed.
+//     • features.enhanced_skills.credit_note: 1,800 → 1,200 (the real
+//       Premium allowance since v0.4).
+//     • plans.*.support_response: NEW — the response windows v0.7.0 left as
+//       per-consumer prose (1 business day / 8 / 4 business hours).
+//     • extra_user_offers: NEW — the per-tier additional-user add-on the
+//       dashboard sells: Growth $29 (up to 5 extra), Premium $15 (up to 25).
+//       overage.extra_seat_mo stays for back-compat only.
+//     • overage.extra_domain_mo: REMOVED. No surface can sell an extra domain;
+//       the dashboard hard-blocks domains at the plan allowance.
+//     • ai_credit_schedule.blog_draft is PER 500 WORDS (blog_draft_unit_words,
+//       NEW); a 1,500-word post costs 30. redirect_sweep: 5 → 10.
+//     • Ultra ($749) is still not modelled here; each consumer keeps a local
+//       ULTRA block.
+//
 //   v0.7.0 (2026-07-28) — change-turnaround SLA hoisted into the package:
 //     • plans.*.change_sla_days: NEW — business days to deliver a standard
 //       ticketed change (4 / 2 / 1). Previously this number existed ONLY as
@@ -128,9 +147,9 @@ export const PRICING = {
         // 1digital-new-site); this bump folds them into the shared source so the
         // overrides can be deleted. Per-action credit schedule + overage rates
         // unchanged.
-        essentials: { price_mo: 89, price_yr: 1068, hosted: true, bandwidth_gb: 10, ai_credits: 100, seats: 1, domains: 1, change_sla_days: 4, strategy_hours_mo: 0, posture: "guided", sla: false, max_cms_pages: 3 },
-        managed: { price_mo: 199, price_yr: 2388, hosted: true, bandwidth_gb: 25, ai_credits: 400, seats: 2, domains: 1, change_sla_days: 2, strategy_hours_mo: 1, posture: "accompanied", sla: true, max_cms_pages: 20 },
-        white_glove: { price_mo: 449, price_yr: 5388, hosted: true, bandwidth_gb: 100, ai_credits: 1200, seats: 4, domains: 3, change_sla_days: 1, strategy_hours_mo: 1, posture: "led", sla: true, max_cms_pages: 50 },
+        essentials: { price_mo: 89, price_yr: 1068, hosted: true, bandwidth_gb: 10, ai_credits: 100, seats: 1, domains: 1, change_sla_days: 4, support_response: "1 business day", strategy_hours_mo: 0, posture: "guided", sla: false, max_cms_pages: 10 },
+        managed: { price_mo: 199, price_yr: 2388, hosted: true, bandwidth_gb: 25, ai_credits: 400, seats: 2, domains: 1, change_sla_days: 2, support_response: "8 business hours", strategy_hours_mo: 1, posture: "accompanied", sla: true, max_cms_pages: 25 },
+        white_glove: { price_mo: 449, price_yr: 5388, hosted: true, bandwidth_gb: 100, ai_credits: 1200, seats: 4, domains: 3, change_sla_days: 1, support_response: "4 business hours", strategy_hours_mo: 1, posture: "led", sla: true, max_cms_pages: null },
     },
     // AI Visibility tracker caps — enforced server-side per calendar month.
     // Cost-cap enforcement today is GLOBAL (lib/ai-visibility/cost-tracker.ts);
@@ -161,14 +180,19 @@ export const PRICING = {
     overage: {
         bandwidth_per_gb: 0.50, // ~3.3x the ~$0.15/GB Vercel cost
         ai_credit: 0.10,
-        extra_seat_mo: 15,
-        extra_domain_mo: 25,
+        extra_seat_mo: 15, // back-compat only; the real offer is per tier, see extra_user_offers
         reactivation_fee: 49,
-        cms_page_mo: 0, // RETIRED 2026-07-26 — no per-page overage; CMS pages are unlimited
-        cms_page_hard_cap: 75, // RETIRED 2026-07-26 — no longer enforced (kept for back-compat); pages unlimited under fair use
+        cms_page_mo: 0, // RETIRED 2026-07-26 — no per-page overage
+        cms_page_hard_cap: 75, // RETIRED 2026-07-26 — never enforced again (kept for back-compat); see plans.*.max_cms_pages
+    },
+    // Additional users beyond plan seats, a self-serve add-on (dashboard
+    // lib/billing/extra-users.ts). Essentials has none.
+    extra_user_offers: {
+        managed: { price_mo: 29, max_extra: 5 },
+        white_glove: { price_mo: 15, max_extra: 25 },
     },
     thresholds: { warn: 0.80, soft_cap: 1.00, hard_cap: 1.50 }, // fraction of allowance
-    fair_use: { max_pages: 500, max_storage_gb: 25, max_deploys_day: 50, blog_posts_note: "Unlimited blog posts on all plans, subject to plan storage allowance. CMS pages are unlimited too; blog posts are tracked separately from CMS pages." },
+    fair_use: { max_pages: 500, max_storage_gb: 25, max_deploys_day: 50, blog_posts_note: "Unlimited blog posts on all plans, subject to plan storage allowance. Blog posts never count toward the CMS page limit." },
     sla: {
         target: 0.999,
         credits: [
@@ -180,13 +204,14 @@ export const PRICING = {
         claim_window_days: 30,
     },
     ai_credit_schedule: {
-        blog_draft: 10,
+        blog_draft: 10, // per blog_draft_unit_words — a 1,500-word post costs 30
+        blog_draft_unit_words: 500,
         meta_rewrite: 2,
         alt_tags_batch10: 2,
         content_rewrite: 10,
         content_audit: 25,
         brand_voice_train: 20,
-        redirect_sweep: 5,
+        redirect_sweep: 10,
     },
     billing: {
         dunning_retries: 3,
@@ -275,7 +300,7 @@ export const PRICING = {
             plans: ['white_glove'],
             label: "AI-Powered SEO Automation",
             description: "Auto-fix SEO audit issues, generate JSON-LD schema from page content, and run AI-driven internal linking sweeps — directly from your dashboard.",
-            credit_note: "Each automated action draws from your monthly AI credit allowance. Premium includes 1,800 credits/month.",
+            credit_note: "Each automated action draws from your monthly AI credit allowance. Premium includes 1,200 credits/month.",
             capabilities: [
                 "SEO Audit AI Fix — auto-remediate audit findings in one click",
                 "Schema Generator — AI-generated JSON-LD structured data from your content",

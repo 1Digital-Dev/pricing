@@ -9,10 +9,11 @@ export declare const PRICING: {
             readonly seats: 1;
             readonly domains: 1;
             readonly change_sla_days: 4;
+            readonly support_response: "1 business day";
             readonly strategy_hours_mo: 0;
             readonly posture: "guided";
             readonly sla: false;
-            readonly max_cms_pages: 3;
+            readonly max_cms_pages: number | null;
         };
         readonly managed: {
             readonly price_mo: 199;
@@ -23,10 +24,11 @@ export declare const PRICING: {
             readonly seats: 2;
             readonly domains: 1;
             readonly change_sla_days: 2;
+            readonly support_response: "8 business hours";
             readonly strategy_hours_mo: 1;
             readonly posture: "accompanied";
             readonly sla: true;
-            readonly max_cms_pages: 20;
+            readonly max_cms_pages: number | null;
         };
         readonly white_glove: {
             readonly price_mo: 449;
@@ -37,10 +39,11 @@ export declare const PRICING: {
             readonly seats: 4;
             readonly domains: 3;
             readonly change_sla_days: 1;
+            readonly support_response: "4 business hours";
             readonly strategy_hours_mo: 1;
             readonly posture: "led";
             readonly sla: true;
-            readonly max_cms_pages: 50;
+            readonly max_cms_pages: number | null;
         };
     };
     readonly ai_visibility: {
@@ -66,10 +69,19 @@ export declare const PRICING: {
         readonly bandwidth_per_gb: 0.5;
         readonly ai_credit: 0.1;
         readonly extra_seat_mo: 15;
-        readonly extra_domain_mo: 25;
         readonly reactivation_fee: 49;
         readonly cms_page_mo: 0;
         readonly cms_page_hard_cap: 75;
+    };
+    readonly extra_user_offers: {
+        readonly managed: {
+            readonly price_mo: 29;
+            readonly max_extra: 5;
+        };
+        readonly white_glove: {
+            readonly price_mo: 15;
+            readonly max_extra: 25;
+        };
     };
     readonly thresholds: {
         readonly warn: 0.8;
@@ -80,7 +92,7 @@ export declare const PRICING: {
         readonly max_pages: 500;
         readonly max_storage_gb: 25;
         readonly max_deploys_day: 50;
-        readonly blog_posts_note: "Unlimited blog posts on all plans, subject to plan storage allowance. CMS pages are unlimited too; blog posts are tracked separately from CMS pages.";
+        readonly blog_posts_note: "Unlimited blog posts on all plans, subject to plan storage allowance. Blog posts never count toward the CMS page limit.";
     };
     readonly sla: {
         readonly target: 0.999;
@@ -102,12 +114,13 @@ export declare const PRICING: {
     };
     readonly ai_credit_schedule: {
         readonly blog_draft: 10;
+        readonly blog_draft_unit_words: 500;
         readonly meta_rewrite: 2;
         readonly alt_tags_batch10: 2;
         readonly content_rewrite: 10;
         readonly content_audit: 25;
         readonly brand_voice_train: 20;
-        readonly redirect_sweep: 5;
+        readonly redirect_sweep: 10;
     };
     readonly billing: {
         readonly dunning_retries: 3;
@@ -148,7 +161,7 @@ export declare const PRICING: {
             readonly plans: readonly ["white_glove"];
             readonly label: "AI-Powered SEO Automation";
             readonly description: "Auto-fix SEO audit issues, generate JSON-LD schema from page content, and run AI-driven internal linking sweeps — directly from your dashboard.";
-            readonly credit_note: "Each automated action draws from your monthly AI credit allowance. Premium includes 1,800 credits/month.";
+            readonly credit_note: "Each automated action draws from your monthly AI credit allowance. Premium includes 1,200 credits/month.";
             readonly capabilities: readonly ["SEO Audit AI Fix — auto-remediate audit findings in one click", "Schema Generator — AI-generated JSON-LD structured data from your content", "Internal Linking AI Sweep — automated internal link building across your site"];
         };
     };
