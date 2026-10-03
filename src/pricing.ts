@@ -20,8 +20,9 @@
 //       overage.extra_seat_mo stays for back-compat only.
 //     • overage.extra_domain_mo: REMOVED. No surface can sell an extra domain;
 //       the dashboard hard-blocks domains at the plan allowance.
-//     • ai_credit_schedule.blog_draft is PER 500 WORDS (blog_draft_unit_words,
-//       NEW); a 1,500-word post costs 30. redirect_sweep: 5 → 10.
+//     • ai_credit_schedule.blog_draft is PER 500 WORDS (ai_credit_units,
+//       NEW, deliberately outside the schedule); a 1,500-word post costs 30.
+//       redirect_sweep: 5 → 10.
 //     • Ultra ($749) is still not modelled here; each consumer keeps a local
 //       ULTRA block.
 //
@@ -212,14 +213,21 @@ export const PRICING = {
   },
 
   ai_credit_schedule: {
-    blog_draft: 10,           // per blog_draft_unit_words — a 1,500-word post costs 30
-    blog_draft_unit_words: 500,
+    blog_draft: 10,           // per ai_credit_units.blog_draft_words — a 1,500-word post costs 30
     meta_rewrite: 2,
     alt_tags_batch10: 2,
     content_rewrite: 10,
     content_audit: 25,
     brand_voice_train: 20,
     redirect_sweep: 10,
+  },
+
+  // Units for schedule entries that are not a flat per-action price. Kept
+  // OUT of ai_credit_schedule on purpose: consumers spread that block and treat
+  // every key as a billable action, so a unit there would read as an action
+  // costing 500 credits.
+  ai_credit_units: {
+    blog_draft_words: 500,    // blog_draft is charged per this many words
   },
 
   billing: {

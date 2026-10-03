@@ -114,13 +114,15 @@ export declare const PRICING: {
     };
     readonly ai_credit_schedule: {
         readonly blog_draft: 10;
-        readonly blog_draft_unit_words: 500;
         readonly meta_rewrite: 2;
         readonly alt_tags_batch10: 2;
         readonly content_rewrite: 10;
         readonly content_audit: 25;
         readonly brand_voice_train: 20;
         readonly redirect_sweep: 10;
+    };
+    readonly ai_credit_units: {
+        readonly blog_draft_words: 500;
     };
     readonly billing: {
         readonly dunning_retries: 3;

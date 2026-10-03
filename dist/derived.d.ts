@@ -84,7 +84,6 @@ export declare const APB: {
 /** Shorthand: per-action AI credit cost schedule. */
 export declare const AI_CREDIT_SCHEDULE: {
     readonly blog_draft: 10;
-    readonly blog_draft_unit_words: 500;
     readonly meta_rewrite: 2;
     readonly alt_tags_batch10: 2;
     readonly content_rewrite: 10;
