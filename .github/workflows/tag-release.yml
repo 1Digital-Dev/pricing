@@ -1,0 +1,34 @@
+name: Tag release
+
+# When package.json's version on main has no matching git tag yet, create it
+# (vX.Y.Z). Consumers pin @1digital/pricing to an exact tag, and the
+# dashboard's check:pricing requires the latest one, so a merged version bump
+# is not usable until it is tagged. Existing tags are never moved.
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  tag:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Create the version tag if it is missing
+        run: |
+          VERSION=$(node -p "require('./package.json').version")
+          TAG="v${VERSION}"
+          if git rev-parse -q --verify "refs/tags/${TAG}" >/dev/null; then
+            echo "${TAG} already exists; nothing to do."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git tag -a "${TAG}" -m "${TAG}" "${GITHUB_SHA}"
+          git push origin "refs/tags/${TAG}"
+          echo "Created ${TAG} at ${GITHUB_SHA}."
