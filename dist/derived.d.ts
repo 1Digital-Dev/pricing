@@ -9,10 +9,11 @@ export declare const P: {
         readonly seats: 1;
         readonly domains: 1;
         readonly change_sla_days: 4;
+        readonly support_response: "1 business day";
         readonly strategy_hours_mo: 0;
         readonly posture: "guided";
         readonly sla: false;
-        readonly max_cms_pages: 3;
+        readonly max_cms_pages: number | null;
     };
     readonly managed: {
         readonly price_mo: 199;
@@ -23,10 +24,11 @@ export declare const P: {
         readonly seats: 2;
         readonly domains: 1;
         readonly change_sla_days: 2;
+        readonly support_response: "8 business hours";
         readonly strategy_hours_mo: 1;
         readonly posture: "accompanied";
         readonly sla: true;
-        readonly max_cms_pages: 20;
+        readonly max_cms_pages: number | null;
     };
     readonly white_glove: {
         readonly price_mo: 449;
@@ -37,10 +39,11 @@ export declare const P: {
         readonly seats: 4;
         readonly domains: 3;
         readonly change_sla_days: 1;
+        readonly support_response: "4 business hours";
         readonly strategy_hours_mo: 1;
         readonly posture: "led";
         readonly sla: true;
-        readonly max_cms_pages: 50;
+        readonly max_cms_pages: number | null;
     };
 };
 /** Shorthand: AI Visibility per-tier caps. */
@@ -86,7 +89,7 @@ export declare const AI_CREDIT_SCHEDULE: {
     readonly content_rewrite: 10;
     readonly content_audit: 25;
     readonly brand_voice_train: 20;
-    readonly redirect_sweep: 5;
+    readonly redirect_sweep: 10;
 };
 /** Shorthand: notify-and-upgrade thresholds (`warn`, `soft_cap`). */
 export declare const THRESHOLDS: {
@@ -125,7 +128,8 @@ export declare const APB_WG_USD: string;
 /**
  * Essentials annual is structured as "pay for N months instead of 12".
  * Derive N from `price_yr / price_mo` so the copy can't drift if the
- * discount ratio changes. Today: $890 / $89 = 10 months billed → 2 months free.
+ * discount ratio changes. Today: $1,068 / $89 = 12 months billed → 0 free
+ * (annual is 12× monthly since v0.3.2; there is no annual discount).
  */
 export declare const ESSENTIALS_MONTHS_BILLED: number;
 export declare const ESSENTIALS_MONTHS_FREE: number;
