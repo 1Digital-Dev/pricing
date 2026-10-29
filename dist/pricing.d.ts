@@ -69,7 +69,7 @@ export declare const PRICING: {
         readonly bandwidth_per_gb: 0.5;
         readonly ai_credit: 0.1;
         readonly extra_seat_mo: 15;
-        readonly reactivation_fee: 49;
+        readonly reactivation_fee: 250;
         readonly cms_page_mo: 0;
         readonly cms_page_hard_cap: 75;
     };
@@ -128,7 +128,8 @@ export declare const PRICING: {
         readonly dunning_retries: 3;
         readonly dunning_window_days: 7;
         readonly suspend_day: 10;
-        readonly terminate_day: 30;
+        readonly terminate_day: 70;
+        readonly suspension_hold_days: 60;
         readonly data_retention_days: 30;
         readonly annual_renewal_notice_days: 30;
         readonly price_change_notice_days: 30;

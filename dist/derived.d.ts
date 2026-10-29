@@ -114,7 +114,8 @@ export declare const BILLING: {
     readonly dunning_retries: 3;
     readonly dunning_window_days: 7;
     readonly suspend_day: 10;
-    readonly terminate_day: 30;
+    readonly terminate_day: 70;
+    readonly suspension_hold_days: 60;
     readonly data_retention_days: 30;
     readonly annual_renewal_notice_days: 30;
     readonly price_change_notice_days: 30;
