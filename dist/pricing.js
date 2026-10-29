@@ -6,6 +6,14 @@
 //
 // Effective: Jun 13, 2026 · v1.4 (AI credit schedule update)
 //
+//   v0.10.0 (2026-10-29) — non-payment made stricter (Dan, 2026-10-29):
+//     • overage.reactivation_fee: 49 → 250. Charged when a site taken
+//       offline for non-payment is brought back (dashboard
+//       lib/billing/reactivation-fee.ts).
+//     • billing.terminate_day: 30 → 70. A site taken offline on day 10 is
+//       held for 60 days, then terminated. billing.suspension_hold_days: NEW,
+//       the 60 itself; the dashboard counts it from the suspension date.
+//
 //   v0.9.0 (2026-10-03) — package caught up with what the dashboard enforces:
 //     • plans.*.max_cms_pages: 3/20/50 → 10/25/null (null = no limit). Page
 //       caps came back on 2026-09-22 (dashboard config/pricing.config.ts and
@@ -182,7 +190,7 @@ export const PRICING = {
         bandwidth_per_gb: 0.50, // ~3.3x the ~$0.15/GB Vercel cost
         ai_credit: 0.10,
         extra_seat_mo: 15, // back-compat only; the real offer is per tier, see extra_user_offers
-        reactivation_fee: 49,
+        reactivation_fee: 250,
         cms_page_mo: 0, // RETIRED 2026-07-26 — no per-page overage
         cms_page_hard_cap: 75, // RETIRED 2026-07-26 — never enforced again (kept for back-compat); see plans.*.max_cms_pages
     },
@@ -224,7 +232,8 @@ export const PRICING = {
         dunning_retries: 3,
         dunning_window_days: 7,
         suspend_day: 10,
-        terminate_day: 30,
+        terminate_day: 70, // suspend_day + suspension_hold_days
+        suspension_hold_days: 60, // a suspended site is held this long, then terminated
         data_retention_days: 30,
         annual_renewal_notice_days: 30,
         price_change_notice_days: 30,
